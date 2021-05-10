@@ -16,17 +16,15 @@ public class Junk
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("\nRemoving Junk types...");
 
-        for (int j = 0; j < 6; j++)
-        {
             for (int i = 0; i < module.Types.Count; i++)
             {
                 if (module.Types[i].Methods.Count == 0 && module.Types[i].Name.Contains(id))
                 {
                     module.Types.RemoveAt(i);
                     removed++;
+                    i--;
                 }
             }
-        }
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine($"\nRemoved {removed} junk types !");
     }
