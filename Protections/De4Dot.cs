@@ -1,4 +1,4 @@
-﻿using dnlib.DotNet;
+using dnlib.DotNet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,24 +16,26 @@ namespace Rage.Protections
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.WriteLine("\nRemoving AntiDe4Dot attributes...");
 
-
-				foreach (TypeDef type in module.Types)
-					if (type.HasInterfaces)
+			for (int k = 0; k < 6; k++)
+			{
+				for (int i = 0; i < module.Types.Count; i++)
+				{
+					if (module.Types[i].HasInterfaces)
 					{
-						for (int j = 0; j < type.Interfaces.Count; j++)
+						for (int j = 0; j < module.Types[i].Interfaces.Count; j++)
 						{
-							if (type.Interfaces[j].Interface != null)
+							if (module.Types[i].Interfaces[j].Interface != null)
 							{
-								if (type.Interfaces[j].Interface.Name.Contains(module.Types[i].Name) || module.Types[i].Name.Contains(module.Types[i].Interfaces[j].Interface.Name))
+								if (module.Types[i].Interfaces[j].Interface.Name.Contains(module.Types[i].Name) || module.Types[i].Name.Contains(module.Types[i].Interfaces[j].Interface.Name))
 								{
-									module.Types.ToArray();
-									module.Types.Remove(type);
+									module.Types.RemoveAt(i);
 									removed++;
 								}
 							}
 						}
 					}
-
+				}
+			}
 			Console.ForegroundColor = ConsoleColor.White;
 			Console.WriteLine($"\nRemoved {removed} AntiDe4Dot Attributes !");
 		}
