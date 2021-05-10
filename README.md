@@ -2,6 +2,6 @@
 Simple static deobfuscator for ZenFuscator (github.com/Zenixas/ZenFuscator)
 
 
-# Usafe
+## Usage
 
-Rage.exe input.exe
+-Rage.exe input.exe
