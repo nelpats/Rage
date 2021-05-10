@@ -16,26 +16,24 @@ namespace Rage.Protections
 			Console.ForegroundColor = ConsoleColor.Green;
 			Console.WriteLine("\nRemoving AntiDe4Dot attributes...");
 
-			for (int k = 0; k < 6; k++)
-			{
-				for (int i = 0; i < module.Types.Count; i++)
-				{
-					if (module.Types[i].HasInterfaces)
+
+				foreach (TypeDef type in module.Types)
+					if (type.HasInterfaces)
 					{
-						for (int j = 0; j < module.Types[i].Interfaces.Count; j++)
+						for (int j = 0; j < type.Interfaces.Count; j++)
 						{
-							if (module.Types[i].Interfaces[j].Interface != null)
+							if (type.Interfaces[j].Interface != null)
 							{
-								if (module.Types[i].Interfaces[j].Interface.Name.Contains(module.Types[i].Name) || module.Types[i].Name.Contains(module.Types[i].Interfaces[j].Interface.Name))
+								if (type.Interfaces[j].Interface.Name.Contains(module.Types[i].Name) || module.Types[i].Name.Contains(module.Types[i].Interfaces[j].Interface.Name))
 								{
-									module.Types.RemoveAt(i);
+									module.Types.ToArray();
+									module.Types.Remove(type);
 									removed++;
 								}
 							}
 						}
 					}
-				}
-			}
+
 			Console.ForegroundColor = ConsoleColor.White;
 			Console.WriteLine($"\nRemoved {removed} AntiDe4Dot Attributes !");
 		}

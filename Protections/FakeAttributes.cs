@@ -38,21 +38,23 @@ namespace Rage.Protections
 
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("\nRemoving Fake Attributes...");
-            for (int k = 0; k < 6; k++)
-            {
-                for (int i = 0; i < module.Types.Count; i++)
+
+                foreach (TypeDef type in module.Types)
                 {
                     for (int j = 0; j < attributes.Length; j++)
                     {
-                        if (module.Types[i].Methods.Count == 0 && module.Types[i].Name.Equals(attributes[j]) || module.Types[i].Name.Contains(attributes[j]))
+                        if (type.Methods.Count == 0
+                            && type.Name.Equals(attributes[j])
+                            || type.Name.Contains(attributes[j]))
                         {
-                            module.Types.RemoveAt(i);
+                            module.Types.ToArray();
+                            module.Types.Remove(type);
                             removed++;
                         }
                     }
 
                 }
-            }
+
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine($"\nRemoved {removed} Fake Attributes !");
         }
