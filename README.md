@@ -2,11 +2,9 @@
 Simple static deobfuscator for ZenFuscator (github.com/Zenixas/ZenFuscator)
 
 
-## Usage
+##Usage
 
-Rage.exe input.exe
-
-
+```Rage.exe input.exe```
 
 ##Credits
 
